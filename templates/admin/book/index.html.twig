@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des livres {% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for book in books %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- book cover -->
+                    <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                    <!-- main book informations -->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- book title-->
+                            <h5 class="fw-bolder">{{ book.title }}</h5>
+                            <!-- authors -->
+                            {% for author in book.authors %}
+                            {{ author.name }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- book actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ path('app_admin_book_show', {id: book.id}) }}">Voir</a></div>
+                    </div>
+                </div>
+            </div>
+            {% else %} {# Si le tableau est vide #}
+            <p>Aucun enregistrement en base de données.</p>
+            {% endfor %}
+        </div>
+    </div>
+    {{ pagerfanta(books) }}
+</section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajout d'un livre{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<section class="container px-4">
+    <div class="w-50 m-auto">
+        <h1>Ajout d'un livre</h1>
+        
+        {{ form_start(form) }}
+        {{ form_row(form.title, {label: 'Titre'})}}
+        {{ form_row(form.isbn, {label: 'ISBN'})}}
+        {{ form_row(form.cover, {label: 'Lien vers une couverture'})}}
+        {{ form_row(form.editedAt, {label: 'Date édition'})}}
+        {{ form_row(form.plot, {label: 'Plot'}) }}
+        {{ form_row(form.pageNumber, {label: 'Nombre de pages'}) }}
+        {{ form_row(form.status, {label: 'Statut'}) }}
+        {{ form_row(form.editor, {label: 'Editeur'}) }}
+        {{ form_row(form.authors, {label: 'Autheurs'}) }}
+        <button type="submit" class="btn btn-primary">Envoyer</button>
+        {{ form_end(form) }}
+    </div>
+</section>
+{% endblock body %}
