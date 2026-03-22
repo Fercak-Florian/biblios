@@ -49,14 +49,6 @@ class RegistrationFormType extends AbstractType
                 'expanded' => true,   // Affiche les choix sous forme de checkboxes
                 // 'data' => []          // Permet de décocher toutes les cases lors de l'affichage
             ])
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
         ;
     }
 
