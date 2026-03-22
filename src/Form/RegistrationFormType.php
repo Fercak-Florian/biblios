@@ -43,7 +43,9 @@ class RegistrationFormType extends AbstractType
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                    'Utilisateur' => 'ROLE_USER',
-                   'Administrateur' => 'ROLE_ADMIN' 
+                   'Ajouteur de livre' => 'ROLE_AJOUT_DE_LIVRE',
+                   'Editeur de livre' => 'ROLE_EDITION_DE_LIVRE',
+                   'Administrateur' => 'ROLE_ADMIN'
                 ],
                 'multiple' => true,   // Permet la sélection multiple
                 'expanded' => true,   // Affiche les choix sous forme de checkboxes
