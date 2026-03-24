@@ -1,0 +1,15 @@
+# Credentials used for login
+credentials_test.txt
+
+# Environment variables
+.env
+.env.test
+
+# Symfony directories
+/var/
+/vendor/
+/assets/vendor/
+/public/bundles/
+
+# IDE
+.idea
