@@ -38,8 +38,8 @@ final class CommentFactory extends PersistentProxyObjectFactory
             'book' => BookFactory::new(),
             'content' => self::faker()->text(),
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'email' => self::faker()->text(255),
-            'name' => self::faker()->text(255),
+            'email' => self::faker()->email(),
+            'name' => self::faker()->name(),
             'status' => self::faker()->randomElement(CommentStatus::cases()),
         ];
     }

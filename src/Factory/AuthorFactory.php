@@ -35,7 +35,7 @@ final class AuthorFactory extends PersistentProxyObjectFactory
     {
         return [
             'dateOfBirth' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'name' => self::faker()->text(255),
+            'name' => self::faker()->name(),
         ];
     }
 
