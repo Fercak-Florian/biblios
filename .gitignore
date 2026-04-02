@@ -9,7 +9,6 @@ credentials_test.txt
 /vendor/
 /assets/vendor/
 /public/bundles/
-/migrations
 
 # IDE
 .idea
