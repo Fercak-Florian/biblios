@@ -3,13 +3,13 @@ credentials_test.txt
 
 # Environment variables
 .env.local
-.env.test
 
 # Symfony directories
 /var/
 /vendor/
 /assets/vendor/
 /public/bundles/
+/migrations
 
 # IDE
 .idea
