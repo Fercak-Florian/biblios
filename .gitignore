@@ -3,6 +3,7 @@ credentials_test.txt
 
 # Environment variables
 .env.local
+.env.test
 
 # Symfony directories
 /var/
