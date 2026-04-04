@@ -39,7 +39,7 @@ class BookController extends AbstractController
             'book' => $book
         ]);
     }
-    #[IsGranted('ROLE_AJOUT_DE_LIVRE')]
+    #[IsGranted('ROLE_AJOUT')]
     #[Route('/{id}/edit', name: 'app_book_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     #[Route('/new', name: 'app_book_new', methods: ['GET', 'POST'])]
     public function new(?Book $book, Request $request, EntityManagerInterface $manager): Response
