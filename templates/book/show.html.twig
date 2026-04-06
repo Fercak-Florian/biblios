@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends './base.html.twig' %}
 
 {% block title %} {{book.title}} {% endblock %}
 
@@ -27,8 +27,8 @@
                         </div>
                         <p class="lead">Alors que l'Alliance rebelle tente de détruire l'Étoile noire, arme suprême du despotique Empire galactique, Luke Skywalker, jeune ouvrier agricole, intercepte un appel à l'aide de la princesse Leia. Il se lance ainsi dans une mission courageuse afin de la délivrer de Dark Vador et de l'Empire.</p>
                         <div class="d-flex">
-                            <a href="{{ path('app_admin_book_index') }}" class="btn btn-outline-dark flex-shrink-0">Retour à la liste</a>
-                            <a href="{{ path('app_admin_book_edit', {id: book.id}) }}" class="btn btn-outline-dark flex-shrink-0">Éditer</a>
+                            <a href="{{ path('app_book_index') }}" class="btn btn-outline-dark flex-shrink-0">Retour à la liste</a>
+                            <a href="{{ path('app_book_edit', {id: book.id}) }}" class="btn btn-outline-dark flex-shrink-0">Éditer</a>
                         </div>
                     </div>
                 </div>

@@ -52,7 +52,7 @@ class AuthorController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_AJOUT_DE_LIVRE')]
+    #[IsGranted('ROLE_AJOUT')]
     #[Route('/{id}/edit', name: 'app_admin_author_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     #[Route('/new', name: 'app_admin_author_new', methods: ['GET', 'POST'])]
     public function new(?Author $author, Request $request, EntityManagerInterface $manager): Response
