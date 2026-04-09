@@ -6,9 +6,9 @@ security:
     role_hierarchy:
         ROLE_USER: ~
         ROLE_MODERATEUR: ROLE_USER
-        ROLE_AJOUT_DE_LIVRE: ROLE_USER
-        ROLE_EDITION_DE_LIVRE: ROLE_AJOUT_DE_LIVRE
-        ROLE_ADMIN: [ ROLE_MODERATEUR, ROLE_EDITION_DE_LIVRE ]
+        ROLE_AJOUT: ROLE_USER
+        ROLE_EDITION: ROLE_AJOUT
+        ROLE_ADMIN: [ ROLE_MODERATEUR, ROLE_EDITION ]
 
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:

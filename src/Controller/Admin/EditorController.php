@@ -22,13 +22,13 @@ class EditorController extends AbstractController
         ]);
     }
 
-    #[IsGranted('ROLE_AJOUT_DE_LIVRE')]
+    #[IsGranted('ROLE_AJOUT')]
     #[Route('/{id}/edit', name: 'app_admin_editor_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
     #[Route('/new', name: 'app_admin_editor_new', methods: ['GET', 'POST'])]
     public function new(?Editor $editor,Request $request, EntityManagerInterface $manager): Response
     {
         if ($editor) {
-            $this->denyAccessUnlessGranted('ROLE_EDITION_DE_LIVRE');
+            $this->denyAccessUnlessGranted('ROLE_EDITION');
         }
 
         $editor = new Editor();
