@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Repository\BookRepository;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
@@ -12,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class BookController extends AbstractController
 {
-    #[Route('/book', name: 'app_book', methods: ['GET'])]
+    #[Route('/book', name: 'app_book_index', methods: ['GET'])]
     public function index(Request $request, BookRepository $repository): Response
     {
         $books = Pagerfanta::createForCurrentPageWithMaxPerPage(
@@ -23,6 +24,15 @@ final class BookController extends AbstractController
 
         return $this->render('book/index.html.twig', [
             'books' => $books,
+        ]);
+    }
+
+    #[Route('book/{id}/show', name: 'app_book_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function show(?Book $book /*BookRepository $repository*/): Response
+    {
+        // $book = $repository->find(['id' => $id]);
+        return $this->render('book/show.html.twig', [
+            'book' => $book
         ]);
     }
 }
