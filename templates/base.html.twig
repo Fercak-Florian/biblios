@@ -23,6 +23,9 @@
                         {% if app.user %}
                             <li class="nav-item"><a class="nav-link" href="/logout">Se déconnecter</a></li>
                             <li class="nav-item"><a class="nav-link">{{ app.user.userIdentifier }}</a></li>
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li class="nav-item"><a class="nav-link" href="/administration">Administration</a></li>
+                                {% endif %}
                         {% endif %}
                         {% if app.user === null %}
                             <li class="nav-item"><a class="nav-link" href="/login">Se connecter</a></li>
