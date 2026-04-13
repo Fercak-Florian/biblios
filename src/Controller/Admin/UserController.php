@@ -12,7 +12,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-class RegistrationController extends AbstractController
+class UserController extends AbstractController
 {
     #[IsGranted("ROLE_ADMIN")]
     #[Route('/admin/user/new', name: 'app_register')]
