@@ -24,7 +24,17 @@
                             <li class="nav-item"><a class="nav-link" href="/logout">Se déconnecter</a></li>
                             <li class="nav-item"><a class="nav-link">{{ app.user.userIdentifier }}</a></li>
                                 {% if is_granted('ROLE_ADMIN') %}
-                                    <li class="nav-item"><a class="nav-link" href="/administration">Administration</a></li>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Administration
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="{{ path('app_awesome') }}">Gestion des utilisateurs</a></li>
+                                            <li><a class="dropdown-item" href="{{ path('app_awesome') }}">Gestion des livres</a></li>
+                                            <li><a class="dropdown-item" href="{{ path('app_admin_author_index') }}">Gestion des auteurs</a></li>
+                                            <li><a class="dropdown-item" href="{{ path('app_admin_editor_index') }}">Gestion des editeurs</a></li>
+                                        </ul>
+                                    </div>
                                 {% endif %}
                         {% endif %}
                         {% if app.user === null %}
