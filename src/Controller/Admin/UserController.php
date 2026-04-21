@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,10 +13,17 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[IsGranted("ROLE_ADMIN")]
+#[Route('/admin/user')]
 class UserController extends AbstractController
 {
-    #[IsGranted("ROLE_ADMIN")]
-    #[Route('/admin/user/new', name: 'app_register')]
+
+    public function __construct(private UserRepository $userRepository)
+    {
+    }
+
+
+    #[Route('/new', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -39,6 +47,15 @@ class UserController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
+        ]);
+    }
+
+    #[Route('', name: 'app_admin_user_index', methods: ['GET'])]
+    public function index(): Response
+    {
+        $users = $this->userRepository->findAll();
+        return $this->render('admin/user/index.html.twig', [
+            'users' => $users
         ]);
     }
 }
