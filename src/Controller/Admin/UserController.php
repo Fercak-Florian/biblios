@@ -18,36 +18,11 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class UserController extends AbstractController
 {
 
-    public function __construct(private UserRepository $userRepository)
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private UserRepository $userRepository
+    )
     {
-    }
-
-
-    #[Route('/new', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
-    {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            /** @var string $plainPassword */
-            $plainPassword = $form->get('plainPassword')->getData();
-
-            // encode the plain password
-            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_main_index');
-        }
-
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form,
-        ]);
     }
 
     #[Route('', name: 'app_admin_user_index', methods: ['GET'])]
@@ -57,5 +32,47 @@ class UserController extends AbstractController
         return $this->render('admin/user/index.html.twig', [
             'users' => $users
         ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_admin_user_edit', requirements: ['id' => '\d+'], methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'app_admin_user_new', methods: ['GET', 'POST'])]
+    public function new(?User $user, Request $request): Response
+    {
+        if ($user) {
+            $this->denyAccessUnlessGranted('ROLE_EDITION');
+        }
+
+        $user ??= new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('app_admin_user_index');
+        }
+
+        return $this->render('admin/user/new.html.twig', [
+            'form' => $form
+        ]);
+    }
+
+    #[Route('/{id}/delete', name: 'app_admin_user_delete', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function delete($id): Response
+    {
+        $user = $this->entityManager->getRepository(User::class)->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException(
+                'No user found for id '.$id
+            );
+        }
+
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+
+        return $this->redirectToRoute('app_admin_user_index');
     }
 }

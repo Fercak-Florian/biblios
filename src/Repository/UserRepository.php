@@ -66,4 +66,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function deleteById($id): void {
+//        $this->deleteById($id);
+        dd($id);
+    }
 }
